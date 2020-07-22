@@ -23,7 +23,8 @@ namespace Blackjack
                 cardName = RandomCard(playingCards); //ランダムにカードを引く
                 Console.WriteLine($"あなたの引いたカードは{cardName}です。"); //出力する
                 Console.WriteLine();
-                player.Hiku(CardPoint(cardName)); //カードを引く
+                player.Hiku(PointPlayer(cardName)); //カードを引く
+
                 playingCards.Remove(cardName); //引く際にガードの重複はないようにする
             }
            
@@ -58,7 +59,7 @@ namespace Blackjack
                 {
                     cardName = RandomCard(playingCards);
                     Console.WriteLine($"あなたの引いたカードは{cardName}です。");
-                    player.Hiku(CardPoint(cardName));
+                    player.Hiku(PointPlayer(cardName));
                     playingCards.Remove(cardName);
                     Console.WriteLine($"あなたの得点は{player.GetPoints()}です。");
                     Console.WriteLine();
@@ -153,6 +154,7 @@ namespace Blackjack
             if (pips == "A")
             {
                 cardPoint = 1;
+                
             }
 
             else if (pips == "J" || pips == "Q" || pips == "K")
@@ -168,6 +170,34 @@ namespace Blackjack
             return cardPoint;
         }
 
+        static int PointPlayer(string cardName)
+        {
+            int numberPos = cardName.IndexOf(" ") + 1;
+            string card = cardName.Substring(numberPos);
+            
+            if (card == "A")
+            {
+                Console.WriteLine("1にしますか？11にしますか？1か11かを入力してください。");
+
+                string acePointStr = Console.ReadLine();
+                while ((acePointStr != "1") && (acePointStr != "11"))
+                {
+                    Console.WriteLine("1か11かを入力してください。");
+                    Console.ReadLine();
+                }
+
+                int acePoint = Convert.ToInt32(acePointStr);
+
+                return acePoint;
+            } 
+            else
+            {
+                return CardPoint(cardName);
+
+            }
+            
+        }
+
         static string RandomCard(ArrayList playingCards) //ランダムにカードを引く
         {
             Random rnd = new Random();
@@ -175,6 +205,7 @@ namespace Blackjack
             string cardName = (string)playingCards[cardIndex];
             return cardName;
         }
+
 
         static void WhoWin(int player, int dealer) //結果を判断して、出力する
         {
