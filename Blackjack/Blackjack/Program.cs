@@ -42,8 +42,12 @@ namespace Blackjack
             playingCards.Remove(cardName);
 
             Console.WriteLine($"あなたの現在の得点は{player.GetPoints()}。");
+            if(player.GetPoints() == 21)
+            {
+                Console.WriteLine("*☆,°*:.☆*☆,°*:.☆BLACKJACK!*☆,°*:.☆*☆,°*:.☆");
+            }
 
-            while (player.points < 21) //プレイヤー21点まで引くか引かないかを聞く
+            while (player.GetPoints() < 21) //プレイヤー21点まで引くか引かないかを聞く
             {
 
                 Console.WriteLine("カードを引きますか？引く場合はYを、引かない場合はNを入力してください。");
@@ -70,8 +74,9 @@ namespace Blackjack
                 {
                     break;
                 }
-
+               
             }
+            
 
             if (player.GetPoints() < 21) //プレイヤーの点数が21より小さい、ディーラーがカードを引く
             {
@@ -84,6 +89,10 @@ namespace Blackjack
                     playingCards.Remove(cardName);
                 }
 
+            }
+            else if (player.GetPoints() > 21)
+            {
+                Console.WriteLine("！！！！！！！バースト！！！！！！！");
             }
 
 
@@ -213,20 +222,29 @@ namespace Blackjack
             int dealerDiff = Math.Abs(21 - dealer);
             Console.WriteLine();
 
-            if (playerDiff < dealerDiff)
+            if(player > 21)
             {
-                Console.WriteLine("*☆,°*:.☆*☆,°*:.☆【あなたの勝ちです！】*☆,°*:.☆*☆,°*:.☆");
+                 
+                 Console.WriteLine("=============【あなたの負けです！】=============");
             }
-
-            else if(playerDiff == dealerDiff)
-            {
-                Console.WriteLine("*☆,°*:.☆*☆,°*:.☆【引き分けです！】*☆,°*:.☆*☆,°*:.☆");
-            }
-
             else
             {
-                Console.WriteLine("=============【あなたの負けです！】=============");         
+                if (playerDiff < dealerDiff)
+                {
+                    Console.WriteLine("*☆,°*:.☆*☆,°*:.☆【あなたの勝ちです！】*☆,°*:.☆*☆,°*:.☆");
+                }
+
+                else if (playerDiff == dealerDiff)
+                {
+                    Console.WriteLine("*☆,°*:.☆*☆,°*:.☆【引き分けです！】*☆,°*:.☆*☆,°*:.☆");
+                }
+
+                else
+                {
+                    Console.WriteLine("=============【あなたの負けです！】=============");
+                }
             }
+            
 
             Console.WriteLine();
 
