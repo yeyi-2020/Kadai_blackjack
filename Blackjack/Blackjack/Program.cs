@@ -11,8 +11,6 @@ namespace Blackjack
             Console.WriteLine("ゲームを開始します。");
             Console.WriteLine();
 
-            
-
             Player player = new Player();
             Dealer dealer = new Dealer();
 
@@ -20,25 +18,22 @@ namespace Blackjack
 
             string cardName;
 
-
-            cardName = RandomCard(playingCards); //ランダムにカードを引く
-            Console.WriteLine($"あなたの引いたカードは{cardName}です。"); //出力する
-            player.Hiku(CardPoint(cardName)); //カードを引く
-            playingCards.Remove(cardName); //引く際にガードの重複はないようにする
-
-            cardName = RandomCard(playingCards);
-            Console.WriteLine($"あなたの引いたカードは{cardName}です。");
-            Console.WriteLine();
-            player.Hiku(CardPoint(cardName));
-            playingCards.Remove(cardName);
-
-
-
+            for(int i =1; i <= 2; i++)
+            {
+                cardName = RandomCard(playingCards); //ランダムにカードを引く
+                Console.WriteLine($"あなたの引いたカードは{cardName}です。"); //出力する
+                Console.WriteLine();
+                player.Hiku(CardPoint(cardName)); //カードを引く
+                playingCards.Remove(cardName); //引く際にガードの重複はないようにする
+            }
+           
             cardName = RandomCard(playingCards);
             Console.WriteLine($"ディーナーの引いたカードは{cardName}です。");
+            Console.WriteLine();
             dealer.Hiku(CardPoint(cardName));
             playingCards.Remove(cardName);
             cardName = RandomCard(playingCards);
+
             Console.WriteLine("ディーナーの2枚目のカードは分かりません。");
             Console.WriteLine();
             dealer.Hiku(CardPoint(cardName));
@@ -46,8 +41,6 @@ namespace Blackjack
             playingCards.Remove(cardName);
 
             Console.WriteLine($"あなたの現在の得点は{player.GetPoints()}。");
-
-
 
             while (player.points < 21) //プレイヤー21点まで引くか引かないかを聞く
             {
@@ -70,12 +63,13 @@ namespace Blackjack
                     Console.WriteLine($"あなたの得点は{player.GetPoints()}です。");
                     Console.WriteLine();
 
-
                 }
+
                 else //引かない場合
                 {
                     break;
                 }
+
             }
 
             if (player.GetPoints() < 21) //プレイヤーの点数が21より小さい、ディーラーがカードを引く
@@ -88,6 +82,7 @@ namespace Blackjack
                     dealer.Hiku(CardPoint(cardName));
                     playingCards.Remove(cardName);
                 }
+
             }
 
 
@@ -100,13 +95,9 @@ namespace Blackjack
             WhoWin(player.GetPoints(), dealer.GetPoints());
             Console.WriteLine("★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆");
             Console.WriteLine("★★★ブラックジャック終了！また遊んでね！★★★");
-
-
         }
-
-
         
-        
+       
         static ArrayList Playingcards() //52枚トランプ
         {
             ArrayList playingCards = new ArrayList();
@@ -148,7 +139,9 @@ namespace Blackjack
                     }
 
                 }
+
             }
+
             return playingCards;
         }
 
@@ -161,10 +154,12 @@ namespace Blackjack
             {
                 cardPoint = 1;
             }
+
             else if (pips == "J" || pips == "Q" || pips == "K")
             {
                 cardPoint = 10;
             }
+
             else
             {
                 cardPoint = Convert.ToInt32(pips);
@@ -192,12 +187,14 @@ namespace Blackjack
                 Console.WriteLine("*☆,°*:.☆*☆,°*:.☆【あなたの勝ちです！】*☆,°*:.☆*☆,°*:.☆");
                 Console.WriteLine();
             }
+
             else
             {
                 Console.WriteLine();
                 Console.WriteLine("=============【あなたの負けです！】=============");
                 Console.WriteLine();
             }
+
         }
 
     }
@@ -216,6 +213,7 @@ namespace Blackjack
         {
             return points;
         }
+
     }
 
     class Dealer //ディーラーの点数
@@ -242,6 +240,8 @@ namespace Blackjack
         {
             return secondCard;
         }
+
     }
+
 }
 
