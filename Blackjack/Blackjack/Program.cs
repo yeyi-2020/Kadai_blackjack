@@ -180,20 +180,24 @@ namespace Blackjack
         {
             int playerDiff = Math.Abs(21 - player);
             int dealerDiff = Math.Abs(21 - dealer);
+            Console.WriteLine();
 
             if (playerDiff < dealerDiff)
             {
-                Console.WriteLine();
                 Console.WriteLine("*☆,°*:.☆*☆,°*:.☆【あなたの勝ちです！】*☆,°*:.☆*☆,°*:.☆");
-                Console.WriteLine();
+            }
+
+            else if(playerDiff == dealerDiff)
+            {
+                Console.WriteLine("*☆,°*:.☆*☆,°*:.☆【引き分けです！】*☆,°*:.☆*☆,°*:.☆");
             }
 
             else
             {
-                Console.WriteLine();
-                Console.WriteLine("=============【あなたの負けです！】=============");
-                Console.WriteLine();
+                Console.WriteLine("=============【あなたの負けです！】=============");         
             }
+
+            Console.WriteLine();
 
         }
 
