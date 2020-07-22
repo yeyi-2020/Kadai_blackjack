@@ -9,6 +9,7 @@ namespace Blackjack
         {
             Console.WriteLine("★☆★☆★☆★☆★☆ブラックジャックへようこそ！★☆★☆★☆★☆★☆");
             Console.WriteLine("ゲームを開始します。");
+            Console.WriteLine();
 
             ArrayList playingCards = Playingcards();
 
@@ -25,6 +26,7 @@ namespace Blackjack
             playingCards.Remove(cardName);
             cardName = RandomCard(playingCards);
             Console.WriteLine($"あなたの引いたカードは{cardName}です。");
+            Console.WriteLine();
             player.Hiku(CardPoint(cardName));
             playingCards.Remove(cardName);
 
@@ -36,6 +38,7 @@ namespace Blackjack
             playingCards.Remove(cardName);
             cardName = RandomCard(playingCards);
             Console.WriteLine("ディーナーの2枚目のカードは分かりません。");
+            Console.WriteLine();
             dealer.Hiku(CardPoint(cardName));
             dealer.SecondCard(cardName);
             playingCards.Remove(cardName);
@@ -63,6 +66,7 @@ namespace Blackjack
                     player.Hiku(CardPoint(cardName));
                     playingCards.Remove(cardName);
                     Console.WriteLine($"あなたの得点は{player.getPoints()}です。");
+                    Console.WriteLine();
 
                     continue;
 
@@ -88,11 +92,14 @@ namespace Blackjack
             }
 
 
-
+            Console.WriteLine();
             Console.WriteLine($"ディーナーの2枚目のカードは{dealer.getSecondCard()}です。");
             Console.WriteLine($"あなたの得点は{player.getPoints()}です。");
             Console.WriteLine($"ディーナーの得点は{dealer.getPoints()}です。");
+            Console.WriteLine();
+            Console.WriteLine("★☆★☆★☆★☆★☆★結果★☆★☆★☆★☆★☆★");
             whoWin(player.getPoints(), dealer.getPoints());
+            Console.WriteLine("★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆");
             Console.WriteLine("★★★ブラックジャック終了！また遊んでね！★★★");
 
 
@@ -102,7 +109,7 @@ namespace Blackjack
         static ArrayList Playingcards()
         {
             ArrayList playingCards = new ArrayList();
-            string[] cardSets = { "diamond", "club", "heart", "spade" };
+            string[] cardSets = { "ダイヤ", "クラブ", "ハート", "スペード" }; //"diamond", "club", "heart", "spade"
 
             for (int i = 1; i <= 13; i++)
             {
@@ -184,7 +191,7 @@ namespace Blackjack
             }
             else
             {
-                Console.WriteLine("====================あなたの負けです！====================");
+                Console.WriteLine("=========あなたの負けです！=========");
             }
         }
 
